@@ -7,7 +7,6 @@ MAX_PARALLEL_DOWNLOADS=5
 DOWNLOAD_FLAG="$BASE_DIR/.download_done"
 VENV_DIR=/workspace/venv
 PATH="$VENV_DIR/bin:$PATH"
-PIP_QUIET=1
 
 # Default values for flags
 skip_verification=false
@@ -32,7 +31,7 @@ while [ "$1" != "" ]; do
   shift
 done
 
-ownload_models() {
+download_models() {
     local running_downloads=0
     # Check if DESIRED_MODELS is set
     if [ -z "$DESIRED_MODELS" ]; then
@@ -40,10 +39,10 @@ ownload_models() {
         exit 1
     fi
 
-    # Pass the DESIRED_MODELS variable to the Python script and process output lines
+    # Pass the DESIRED_MODELS variable to the Python script and process output lines'
     cd "$MODEL_DIR"
     python3 $TMP_DIR/read_yaml.py "$DESIRED_MODELS" | while IFS=',' read -r CATEGORY MODEL_URL NAME CATEGORIES; do
-        echo "DEBUG: CATEGORY='$CATEGORY', MODEL_URL='$MODEL_URL', NAME='$NAME', CATEGORIES='$CATEGORIES'"  # Debug output
+        # echo "DEBUG: CATEGORY='$CATEGORY', MODEL_URL='$MODEL_URL', NAME='$NAME', CATEGORIES='$CATEGORIES'"  # Debug output
 
         # Check if NAME or MODEL_URL is empty
         if [ -z "$NAME" ] || [ -z "$MODEL_URL" ]; then
@@ -52,29 +51,12 @@ ownload_models() {
         fi
 
         # Extract the directory path from the NAME field
-        local DIR_NAME=$(dirname "$NAME")
-        if [ "$DIR_NAME" = "." ]; then
-            DEST_DIR="$MODEL_DIR/$CATEGORY"
-        else
-            DEST_DIR="$MODEL_DIR/$CATEGORY/$DIR_NAME"
-        fi
-        echo "DEBUG: DEST_DIR='$DEST_DIR'"  # Debug output
+        local DEST_DIR="$MODEL_DIR/$CATEGORY/$(dirname "$NAME")"
+        echo "Downloading $NAME to $DEST_DIR..."
 
         # Create the directory if it doesn't exist
         mkdir -p "$DEST_DIR"
-        if [ $? -ne 0 ]; then
-            echo "Error: Failed to create directory $DEST_DIR"
-            exit 1
-        fi
-
-        # Verify the directory was created
-        if [ ! -d "$DEST_DIR" ]; then
-            echo "Error: Directory $DEST_DIR does not exist"
-            exit 1
-        fi
-
-        echo "Downloading $NAME ($CATEGORY) from $MODEL_URL to $DEST_DIR..."
-
+        cd "$DEST_DIR"
         # Start the download in the background
         {
             aria2c -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL"
@@ -94,9 +76,6 @@ ownload_models() {
             ((running_downloads--))  # Decrement the counter when a job finishes
         done
     done
-
-    # Wait for all background jobs to finish
-    wait
 
     # Create a flag file indicating completion
     touch $DOWNLOAD_FLAG
@@ -191,11 +170,11 @@ fi
 	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-crystools &
 	sleep 3
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-mmaudio &
+	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-mmaudio
 	sleep 3
     cd $BASE_DIR/custom_nodes && git clone https://github.com/ssitu/ComfyUI_UltimateSDUpscale --recursive
     sleep 3
-	comfy --skip-prompt --no-enable-telemetry node update all
+	# comfy --skip-prompt --no-enable-telemetry node update all
 
 	# Define the path to the settings file
 	mkdir -p $BASE_DIR/user/default/
@@ -208,7 +187,7 @@ fi
     "Crystools.ShowRam": true,
     "Crystools.ShowCpu": true,
     "Crystools.ShowHdd": true,
-    "Crystools.RefreshRate": 1,
+    "Crystools.RefreshRate": 2,
     "Comfy.Workflow.ShowMissingModelsWarning": false,
     "Comfy.Keybinding.NewBindings": [
         {
