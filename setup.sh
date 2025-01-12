@@ -56,7 +56,7 @@ download_models() {
 
         # Create the directory if it doesn't exist
         mkdir -p "$DEST_DIR"
-
+        cd "$DEST_DIR"
         # Start the download in the background
         {
             aria2c -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL"
