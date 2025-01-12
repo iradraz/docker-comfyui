@@ -1,0 +1,132 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "cyberrealistic_v40.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "6": {
+    "inputs": {
+      "vae_name": "vae-ft-mse-840000-ema-pruned.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "18": {
+    "inputs": {
+      "lora_name": "pytorch_lora_weights.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "LoraLoader"
+  },
+  "65": {
+    "inputs": {
+      "image": "clipspace/clipspace-mask-2947708.699999988.png [input]",
+      "upload": "image"
+    },
+    "class_type": "LoadImage"
+  },
+  "66": {
+    "inputs": {
+      "pixels": [
+        "65",
+        0
+      ],
+      "vae": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "VAEEncode"
+  },
+  "67": {
+    "inputs": {
+      "samples": [
+        "66",
+        0
+      ],
+      "mask": [
+        "65",
+        1
+      ]
+    },
+    "class_type": "SetLatentNoiseMask"
+  },
+  "68": {
+    "inputs": {
+      "seed": 748032017027150,
+      "steps": 7,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 0.3,
+      "model": [
+        "18",
+        0
+      ],
+      "positive": [
+        "71",
+        0
+      ],
+      "negative": [
+        "72",
+        0
+      ],
+      "latent_image": [
+        "67",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "69": {
+    "inputs": {
+      "samples": [
+        "68",
+        0
+      ],
+      "vae": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "70": {
+    "inputs": {
+      "images": [
+        "69",
+        0
+      ]
+    },
+    "class_type": "PreviewImage"
+  },
+  "71": {
+    "inputs": {
+      "text": "blue eyes",
+      "clip": [
+        "18",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "72": {
+    "inputs": {
+      "text": "text, watermark",
+      "clip": [
+        "18",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  }
+}
