@@ -100,7 +100,7 @@ fi
 	sed -i 's|/usr/bin|/workspace/venv|g' $VENV_DIR/pyvenv.cfg
 	find /workspace/venv/bin -type f -exec sed -i '1s|^#!/tmp/venv/bin/python|#!/workspace/venv/bin/python|' {} \;
 	rm -rf /tmp/venv/
-        source $VENV_DIR/bin/activate
+    source $VENV_DIR/bin/activate
 	
 	# Check if nvidia-smi is installed and works
     nvidia_output=$(nvidia-smi 2>&1)
@@ -256,7 +256,18 @@ EOF
     (sleep 2h; runpodctl stop pod $RUNPOD_POD_ID)
 else
     echo "ComfyUI is already installed. Running server installation."
-    source $VENV_DIR/bin/activate	
+	BASHRC_CONTENT="
+# Automatically activate virtual environment
+if [ -d \"/workspace/venv\" ]; then
+	source /workspace/venv/bin/activate
+	alias python='/workspace/venv/bin/python'
+	alias pip='/workspace/venv/bin/pip'
+fi
+"
+	echo "$BASHRC_CONTENT" >> ~/.bashrc
+	source ~/.bashrc
+	rm -rf /tmp/venv/
+    source $VENV_DIR/bin/activate
     jupyter lab --allow-root --no-browser --port=8888 --ip=* --ServerApp.terminado_settings="{\"shell_command\":[\"/bin/bash\"]}" --ServerApp.token=$SECRET --ServerApp.allow_origin=* --ServerApp.root_dir="/" &
     comfy --install-completion
     comfy --workspace=/workspace/ComfyUI/ --skip-prompt --no-enable-telemetry install --nvidia --restore
