@@ -7,6 +7,7 @@ MAX_PARALLEL_DOWNLOADS=5
 DOWNLOAD_FLAG="$BASE_DIR/.download_done"
 VENV_DIR=/workspace/venv
 PATH="$VENV_DIR/bin:$PATH"
+PIP_QUIET=1
 
 # Default values for flags
 skip_verification=false
@@ -31,7 +32,7 @@ while [ "$1" != "" ]; do
   shift
 done
 
-download_models() {
+ownload_models() {
     local running_downloads=0
     # Check if DESIRED_MODELS is set
     if [ -z "$DESIRED_MODELS" ]; then
@@ -39,7 +40,7 @@ download_models() {
         exit 1
     fi
 
-    # Pass the DESIRED_MODELS variable to the Python script and process output lines'
+    # Pass the DESIRED_MODELS variable to the Python script and process output lines
     cd "$MODEL_DIR"
     python3 $TMP_DIR/read_yaml.py "$DESIRED_MODELS" | while IFS=',' read -r CATEGORY MODEL_URL NAME CATEGORIES; do
         echo "DEBUG: CATEGORY='$CATEGORY', MODEL_URL='$MODEL_URL', NAME='$NAME', CATEGORIES='$CATEGORIES'"  # Debug output
@@ -51,12 +52,29 @@ download_models() {
         fi
 
         # Extract the directory path from the NAME field
-        local DEST_DIR="$MODEL_DIR/$(dirname "$NAME")"
-        echo "Downloading $NAME ($CATEGORY) from $MODEL_URL to $DEST_DIR..."
+        local DIR_NAME=$(dirname "$NAME")
+        if [ "$DIR_NAME" = "." ]; then
+            DEST_DIR="$MODEL_DIR/$CATEGORY"
+        else
+            DEST_DIR="$MODEL_DIR/$CATEGORY/$DIR_NAME"
+        fi
+        echo "DEBUG: DEST_DIR='$DEST_DIR'"  # Debug output
 
         # Create the directory if it doesn't exist
         mkdir -p "$DEST_DIR"
-        cd "$DEST_DIR"
+        if [ $? -ne 0 ]; then
+            echo "Error: Failed to create directory $DEST_DIR"
+            exit 1
+        fi
+
+        # Verify the directory was created
+        if [ ! -d "$DEST_DIR" ]; then
+            echo "Error: Directory $DEST_DIR does not exist"
+            exit 1
+        fi
+
+        echo "Downloading $NAME ($CATEGORY) from $MODEL_URL to $DEST_DIR..."
+
         # Start the download in the background
         {
             aria2c -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL"
@@ -76,6 +94,9 @@ download_models() {
             ((running_downloads--))  # Decrement the counter when a job finishes
         done
     done
+
+    # Wait for all background jobs to finish
+    wait
 
     # Create a flag file indicating completion
     touch $DOWNLOAD_FLAG
