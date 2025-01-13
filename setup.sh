@@ -133,8 +133,8 @@ fi
 	comfy --skip-prompt --no-enable-telemetry node install comfy-image-saver &
     sleep 3
 	comfy --skip-prompt --no-enable-telemetry node install ComfyUI-HunyuanVideoSamplerSave &
-	# sleep 3
-	# comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-florence2 &
+	sleep 3
+	comfy --skip-prompt --no-enable-telemetry node install ComfyUI-OpenPose-Editor &
 	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-videohelpersuite &
 	sleep 3
