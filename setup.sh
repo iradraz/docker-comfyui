@@ -59,7 +59,7 @@ download_models() {
         cd "$DEST_DIR"
         # Start the download in the background
         {
-            aria2c -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL"
+            aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL"
             if [[ $? -eq 0 ]]; then
                 echo "Download finished: $DEST_DIR/$(basename "$NAME")"
             else
@@ -129,47 +129,26 @@ fi
 
 	comfy --workspace=$BASE_DIR --skip-prompt --no-enable-telemetry install --nvidia --restore
 	comfy --install-completion
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node install comfy-image-saver &
-    sleep 3
 	comfy --skip-prompt --no-enable-telemetry node install ComfyUI-HunyuanVideoSamplerSave &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node install ComfyUI-OpenPose-Editor &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-videohelpersuite &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-wd14-tagger & # pythongosssss
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-custom-scripts & # pythongosssss
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_essentials &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-webcam-node &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install gguf &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_controlnet_aux &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_ipadapter_plus &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-hunyuanvideowrapper &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-advanced-controlnet &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install rgthree-comfy &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_ultimatesdupscale &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-kjnodes &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install cg-use-everywhere &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install wavespeed &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-openpose-editor &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-crystools &
-	sleep 3
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-mmaudio
 	sleep 3
     cd $BASE_DIR/custom_nodes && git clone https://github.com/ssitu/ComfyUI_UltimateSDUpscale --recursive

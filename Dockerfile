@@ -32,6 +32,6 @@ VOLUME ["/workspace"]
 WORKDIR /workspace
 
 COPY workflows /tmp/ComfyUI/user/default/workflows/
-COPY config.yaml read_yaml.py setup.sh /tmp
+COPY config.yaml read_yaml.py setup.sh /tmp/
 RUN chmod +x /tmp/setup.sh
 CMD ["bash","-c","source /tmp/setup.sh"]
