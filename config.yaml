@@ -1,3 +1,8 @@
+text_encoders:
+  - url: "https://huggingface.com/comfyanonymous/cosmos_1.0_text_encoder_and_VAE_ComfyUI/resolve/main/text_encoders/oldt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    name: "cosmos/oldt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    model_categories: ["cosmos"]
+
 clip:
   - url: "https://huggingface.com/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
     name: "clip_l.safetensors"
@@ -39,6 +44,12 @@ diffusion_models:
   - url: "https://huggingface.com/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/diffusion_models/hunyuan_video_t2v_720p_bf16.safetensors"
     name: "HUNYUAN/hunyuan_video_t2v_720p_bf16.safetensors"
     model_categories: ["hunyuan_high"]
+  - url: "https://huggingface.co/mcmonkey/cosmos-1.0/resolve/main/Cosmos-1_0-Diffusion-7B-Video2World.safetensors"
+    name: "cosmos/Cosmos-1_0-Diffusion-7B-Video2World.safetensors"
+    model_categories: ["cosmos_video"]
+  - url: "https://huggingface.com/mcmonkey/cosmos-1.0/resolve/main/Cosmos-1_0-Diffusion-7B-Text2World.safetensors"
+    name: "cosmos/Cosmos-1_0-Diffusion-7B-Text2World.safetensors"
+    model_categories: ["cosmos_text"]
 
 upscale_models:
   - url: "https://huggingface.com/Phips/4xNomos8kDAT/resolve/main/4xNomos8kDAT.safetensors"
@@ -55,6 +66,9 @@ vae:
   - url: "https://huggingface.com/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/vae/hunyuan_video_vae_bf16.safetensors"
     name: "HUNYUAN/hunyuan_video_vae_bf16.safetensors"
     model_categories: ["all"]
+  - url: "https://huggingface.com/comfyanonymous/cosmos_1.0_text_encoder_and_VAE_ComfyUI/resolve/main/vae/cosmos_cv8x8x8_1.0.safetensors"
+    name: "cosmos/cosmos_cv8x8x8_1.0.safetensors"
+    model_categories: ["cosmos"]
 
 loras:
   - url: "https://civitai.com/api/download/models/805898?type=Model&format=SafeTensor"
