@@ -3,7 +3,6 @@
 
 - **config.yaml**: Configuration file containing model information.
 - **Dockerfile**: Dockerfile for setting up the environment.
-- **Dockerfile.121**: Alternative Dockerfile for a specific setup.
 - **extract.sh**: Shell script for extracting data from png files.
 - **read_yaml.py**: Python script for reading and processing the `config.yaml` file.
 - **setup.sh**: Shell script for setting up the environment and downloading models.
@@ -13,7 +12,6 @@
 
 ### Environment Variables
 
-- `TMP_DIR`: Temporary directory path.
 - `DESIRED_MODELS`: Comma-separated list of desired model categories.
 
 ### Running the Setup
