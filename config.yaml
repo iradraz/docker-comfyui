@@ -109,6 +109,10 @@ controlnet:
   - url: "https://huggingface.com/InstantX/FLUX.1-dev-Controlnet-Canny/resolve/main/diffusion_pytorch_model.safetensors"
     name: "FLUX/FLUX.1-dev-Controlnet-Canny.safetensors"
     model_categories: ["flux_controlnet"]
+  - url: "https://huggingface.co/stabilityai/stable-diffusion-3.5-controlnets/resolve/main/sd3.5_large_controlnet_canny.safetensors"
+    name: "SD35/sd3.5_large_controlnet_canny.safetensors"
+    model_categories: ["sd35_controlnet"]
+    use_huggingface_api: true
 
 mmaudio:
   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"

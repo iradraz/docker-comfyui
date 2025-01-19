@@ -39,7 +39,7 @@ for category, models in config.items():
         # Check if the model's category is in the desired categories
         if model_category and model_category[0] in desired_categories:  
             models_found = True
-            print(f"{category},{model_url},{model_name},{model_category},{use_huggingface_api}")
+            print(f"{category},{model_url},{model_name},{model_category},{str(use_huggingface_api).lower()}")
     
 
 if not models_found:

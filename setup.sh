@@ -60,12 +60,22 @@ download_models() {
         mkdir -p "$DEST_DIR"
         cd "$DEST_DIR"
         # Setup for downloading with aria2c
+        # if [ "$USE_HUGGINGFACE_API" = "true" ]; then
+        #     aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" --header="Authorization: Bearer $HUGGINGFACE_APIKEY" "$MODEL_URL" &
+        #     echo aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" --header="Authorization: Bearer $HUGHUGGINGFACE_APIKEY" "$MODEL_URL"
+        # else
+        #     aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL" &
+        #     echo aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL"
+        # fi
         if [ "$USE_HUGGINGFACE_API" = "true" ]; then
-            aria2c --file-allocation=none -c -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" --header="Authorization: Bearer $HUGGINGFACE_APIKEY" "$MODEL_URL" &
+            CMD="aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d \"$DEST_DIR\" -o \"$(basename \"$NAME\")\" --header=\"Authorization: Bearer $HUGGINGFACE_APIKEY\" \"$MODEL_URL\""
+            echo "$CMD"
+            eval "$CMD" &
         else
-            aria2c --file-allocation=none -c -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL" &
+            CMD="aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d \"$DEST_DIR\" -o \"$(basename \"$NAME\")\" \"$MODEL_URL\""
+            echo "$CMD"
+            eval "$CMD" &
         fi
-
 
         # Increment the counter for running downloads
         ((running_downloads++))
