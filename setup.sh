@@ -61,9 +61,9 @@ download_models() {
         cd "$DEST_DIR"
         # Setup for downloading with aria2c
         if [ "$USE_HUGGINGFACE_API" = "true" ]; then
-            aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" --header="Authorization: Bearer $HUGGINGFACE_APIKEY" "$MODEL_URL" &
+            aria2c --file-allocation=none -c -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" --header="Authorization: Bearer $HUGGINGFACE_APIKEY" "$MODEL_URL" &
         else
-            aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL" &
+            aria2c --file-allocation=none -c -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL" &
         fi
 
 
