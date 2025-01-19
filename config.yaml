@@ -13,12 +13,20 @@ clip:
   - url: "https://huggingface.com/city96/t5-v1_1-xxl-encoder-gguf/resolve/main/t5-v1_1-xxl-encoder-Q8_0.gguf"
     name: "FLUX/t5-v1_1-xxl-encoder-Q8_0.gguf"
     model_categories: ["flux_low"]
-  - url: "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
+  - url: "https://huggingface.com/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
     name: "FLUX/t5xxl_fp8_e4m3fn.safetensors"
     model_categories: ["flux_low"]
   - url: "https://huggingface.com/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/text_encoders/llava_llama3_fp8_scaled.safetensors"
     name: "HUNYUAN/llava_llama3_fp8_scaled.safetensors"
     model_categories: ["hunyuan"]
+  - url: "https://huggingface.com/stabilityai/stable-diffusion-3.5-large/resolve/main/text_encoders/clip_g.safetensors"
+    name: "SD35/clip_g.safetensors"
+    model_categories: ["sd35"]
+    use_huggingface_api: true
+  - url: "https://huggingface.com/stabilityai/stable-diffusion-3.5-large/resolve/main/text_encoders/t5xxl_fp8_e4m3fn.safetensors"
+    name: "SD35/t5xxl_fp8_e4m3fn.safetensors"
+    model_categories: ["sd35"]
+    use_huggingface_api: true
 
 checkpoints:
   - url: "https://huggingface.com/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
@@ -27,6 +35,10 @@ checkpoints:
   - url: "https://civitai.com/api/download/models/119057?type=Model&format=SafeTensor&size=pruned&fp=fp16"
     name: "SD15/meinamix_meinaV11.safetensors"
     model_categories: ["sd15"]
+  - url: "https://huggingface.co/stabilityai/stable-diffusion-3.5-large/resolve/main/sd3.5_large.safetensors"
+    name: "SD35/sd3.5_large.safetensors"
+    model_categories: ["sd35"]
+    use_huggingface_api: true
 
 unet:
    - url: "https://huggingface.com/city96/HunyuanVideo-gguf/resolve/main/hunyuan-video-t2v-720p-Q8_0.gguf"
@@ -44,7 +56,7 @@ diffusion_models:
   - url: "https://huggingface.com/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/diffusion_models/hunyuan_video_t2v_720p_bf16.safetensors"
     name: "HUNYUAN/hunyuan_video_t2v_720p_bf16.safetensors"
     model_categories: ["hunyuan_high"]
-  - url: "https://huggingface.co/mcmonkey/cosmos-1.0/resolve/main/Cosmos-1_0-Diffusion-7B-Video2World.safetensors"
+  - url: "https://huggingface.com/mcmonkey/cosmos-1.0/resolve/main/Cosmos-1_0-Diffusion-7B-Video2World.safetensors"
     name: "cosmos/Cosmos-1_0-Diffusion-7B-Video2World.safetensors"
     model_categories: ["cosmos_video"]
   - url: "https://huggingface.com/mcmonkey/cosmos-1.0/resolve/main/Cosmos-1_0-Diffusion-7B-Text2World.safetensors"

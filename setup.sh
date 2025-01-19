@@ -41,31 +41,31 @@ download_models() {
 
     # Pass the DESIRED_MODELS variable to the Python script and process output lines'
     cd "$MODEL_DIR"
-    python3 $TMP_DIR/read_yaml.py "$DESIRED_MODELS" | while IFS=',' read -r CATEGORY MODEL_URL NAME CATEGORIES; do
+    python3 $TMP_DIR/read_yaml.py "$DESIRED_MODELS" | while IFS=',' read -r CATEGORY MODEL_URL NAME CATEGORIES USE_HUGGINGFACE_API; do
         # echo "DEBUG: CATEGORY='$CATEGORY', MODEL_URL='$MODEL_URL', NAME='$NAME', CATEGORIES='$CATEGORIES'"  # Debug output
 
         # Check if NAME or MODEL_URL is empty
         if [ -z "$NAME" ] || [ -z "$MODEL_URL" ]; then
             echo "Warning: Name or URL is missing. Skipping..."
+            echo ""
             continue
         fi
 
         # Extract the directory path from the NAME field
         local DEST_DIR="$MODEL_DIR/$CATEGORY/$(dirname "$NAME")"
         echo "Downloading $NAME to $DEST_DIR..."
+        echo ""
 
         # Create the directory if it doesn't exist
         mkdir -p "$DEST_DIR"
         cd "$DEST_DIR"
-        # Start the download in the background
-        {
-            aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL"
-            if [[ $? -eq 0 ]]; then
-                echo "Download finished: $DEST_DIR/$(basename "$NAME")"
-            else
-                echo "Download failed: $DEST_DIR/$(basename "$NAME")"
-            fi
-        } &
+        # Setup for downloading with aria2c
+        if [ "$USE_HUGGINGFACE_API" = "True" ]; then
+            aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" --header="Authorization: Bearer $HUGGINGFACE_APIKEY" "$MODEL_URL" &
+        else
+            aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL" &
+        fi
+
 
         # Increment the counter for running downloads
         ((running_downloads++))

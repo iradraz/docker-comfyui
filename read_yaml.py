@@ -31,16 +31,16 @@ for category, models in config.items():
         model_category = model.get("model_categories")  # Access the model_categories field
         model_url = model.get("url")                     # Get model URL
         model_name = model.get("name")                   # Get model name
+        use_huggingface_api = model.get("use_huggingface_api", False)  # Check if flag is set
 
         # Debugging output for the model dictionary
         #print(f"DEBUG: Model dict: {model}")
 
         # Check if the model's category is in the desired categories
-        if model_category and model_category[0] in desired_categories:  # Check that model_category is not None
+        if model_category and model_category[0] in desired_categories:  
             models_found = True
-            print(f"{category},{model_url},{model_name},{model_category}")
-    #    else:
-    #        print(f"DEBUG: Model '{model_name}' with category '{model_category}' not in desired categories.")
+            print(f"{category},{model_url},{model_name},{model_category},{use_huggingface_api}")
+    
 
 if not models_found:
     print("No matching models found in the specified categories.")
