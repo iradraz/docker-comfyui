@@ -93,18 +93,20 @@ download_models() {
 
 INSTALL_FLAG="$BASE_DIR/.installed"
 
-if [ ! -f "$INSTALL_FLAG" ]; then
-    echo "Starting ComfyUI installation..."
-	BASHRC_CONTENT="
+BASHRC_CONTENT="
 # Automatically activate virtual environment
 if [ -d \"/workspace/venv\" ]; then
-	source /workspace/venv/bin/activate
-	alias python='/workspace/venv/bin/python'
-	alias pip='/workspace/venv/bin/pip'
+    source /workspace/venv/bin/activate
+    alias python='/workspace/venv/bin/python'
+    alias pip='/workspace/venv/bin/pip'
 fi
 "
-	echo "$BASHRC_CONTENT" >> ~/.bashrc
-	source ~/.bashrc
+echo "$BASHRC_CONTENT" >> ~/.bashrc
+
+if [ ! -f "$INSTALL_FLAG" ]; then
+    echo "Starting ComfyUI installation..."
+
+    source ~/.bashrc
 	rsync -av /tmp/venv/ $VENV_DIR
 	sed -i 's|VIRTUAL_ENV=.*|VIRTUAL_ENV=/workspace/venv|' $VENV_DIR/bin/activate
 	sed -i 's|/usr/bin|/workspace/venv|g' $VENV_DIR/pyvenv.cfg
@@ -245,15 +247,7 @@ EOF
     (sleep 2h; runpodctl stop pod $RUNPOD_POD_ID)
 else
     echo "ComfyUI is already installed. Running server installation."
-	BASHRC_CONTENT="
-# Automatically activate virtual environment
-if [ -d \"/workspace/venv\" ]; then
-	source /workspace/venv/bin/activate
-	alias python='/workspace/venv/bin/python'
-	alias pip='/workspace/venv/bin/pip'
-fi
-"
-	echo "$BASHRC_CONTENT" >> ~/.bashrc
+
 	source ~/.bashrc
 	rm -rf /tmp/venv/
     source $VENV_DIR/bin/activate

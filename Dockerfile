@@ -6,17 +6,17 @@ ENV VENV_DIR=/workspace/venv
 ENV TMP_DIR=/tmp
 
 # Update package list and install dependencies
-RUN apt-get update -y && apt-get install --yes --no-install-recommends \
+RUN apt-get update -y -qq && apt-get install -qq --yes --no-install-recommends \
     software-properties-common libgl1 \
     build-essential rsync aria2 \
     ffmpeg libsm6 libxext6 \
-    nvidia-cuda-toolkit \
+    # nvidia-cuda-toolkit \
     wget git sudo curl vim bash \
     btop glances
  
 #    rm -rf /var/lib/apt/lists/*
 RUN add-apt-repository ppa:deadsnakes/ppa && \
-    apt install python3.10 python3.10-distutils python3.10-venv python3.10-dev python3-pip -y --no-install-recommends
+    apt install -qq  python3.10 python3.10-distutils python3.10-venv python3.10-dev python3-pip -y --no-install-recommends
 
 # Set Python 3.10 as the default
 RUN python3 -m venv $TMP_DIR/venv
