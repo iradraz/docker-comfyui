@@ -1,5 +1,5 @@
 # This repository intend to run on runpod.io and it's the template for ComfyUI
-## running this on Runpod gives the ability to stop the machine and keep the files on a Volume Storage while runpod machine is off
+running this on runpod gives the ability to stop the machine and keep the files on a Volume Storage while runpod machine is off
 
 
 ## Key Files
