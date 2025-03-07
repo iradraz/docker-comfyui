@@ -29,9 +29,10 @@ models_found = False
 for category, models in config.items():
     for model in models:
         model_category = model.get("model_categories")  # Access the model_categories field
-        model_url = model.get("url")                     # Get model URL
-        model_name = model.get("name")                   # Get model name
-        use_huggingface_api = model.get("use_huggingface_api", False)  # Check if flag is set
+        repo = model.get("repo")  # get repo name
+        repo_path = model.get("repo_path")                     # Get file path
+        local_dir = model.get("local_dir")                   # Get model dir
+        local_name = model.get("local_name")                   # Get model name
 
         # Debugging output for the model dictionary
         #print(f"DEBUG: Model dict: {model}")
@@ -39,7 +40,7 @@ for category, models in config.items():
         # Check if the model's category is in the desired categories
         if model_category and model_category[0] in desired_categories:  
             models_found = True
-            print(f"{category},{model_url},{model_name},{model_category},{str(use_huggingface_api).lower()}")
+            print(f"{category},{repo},{repo_path},{local_dir},{local_name}")
     
 
 if not models_found:

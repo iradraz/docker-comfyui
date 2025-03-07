@@ -41,41 +41,35 @@ download_models() {
 
     # Pass the DESIRED_MODELS variable to the Python script and process output lines'
     cd "$MODEL_DIR"
-    python3 $TMP_DIR/read_yaml.py "$DESIRED_MODELS" | while IFS=',' read -r CATEGORY MODEL_URL NAME CATEGORIES USE_HUGGINGFACE_API; do
+    #             print(f"{category},{repo},{repo_path},{local_dir},{local_name}")
+    python3 $TMP_DIR/read_yaml.py "$DESIRED_MODELS" | while IFS=',' read -r CATEGORY REPO REPO_PATH LOCAL_DIR LOCAL_NAME; do
         # echo "DEBUG: CATEGORY='$CATEGORY', MODEL_URL='$MODEL_URL', NAME='$NAME', CATEGORIES='$CATEGORIES'"  # Debug output
 
         # Check if NAME or MODEL_URL is empty
-        if [ -z "$NAME" ] || [ -z "$MODEL_URL" ]; then
-            echo "Warning: Name or URL is missing. Skipping..."
+        if [ -z "$REPO" ] || [ -z "$REPO_PATH" ]; then
+            echo "Warning: Name or REPO_PATH is missing. Skipping..."
             echo ""
             continue
         fi
 
         # Extract the directory path from the NAME field
-        local DEST_DIR="$MODEL_DIR/$CATEGORY/$(dirname "$NAME")"
-        echo "Downloading $NAME to $DEST_DIR..."
+        local DEST_DIR="$MODEL_DIR/$CATEGORY/$LOCAL_DIR"
+        echo "Downloading $LOCAL_NAME to $DEST_DIR"
         echo ""
 
         # Create the directory if it doesn't exist
         mkdir -p "$DEST_DIR"
         cd "$DEST_DIR"
-        # Setup for downloading with aria2c
-        # if [ "$USE_HUGGINGFACE_API" = "true" ]; then
-        #     aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" --header="Authorization: Bearer $HUGGINGFACE_APIKEY" "$MODEL_URL" &
-        #     echo aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" --header="Authorization: Bearer $HUGHUGGINGFACE_APIKEY" "$MODEL_URL"
-        # else
-        #     aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL" &
-        #     echo aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d "$DEST_DIR" -o "$(basename "$NAME")" "$MODEL_URL"
-        # fi
-        if [ "$USE_HUGGINGFACE_API" = "true" ]; then
-            CMD="aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d \"$DEST_DIR\" -o \"$(basename \"$NAME\")\" --header=\"Authorization: Bearer $HUGGINGFACE_APIKEY\" \"$MODEL_URL\""
-            echo "$CMD"
-            eval "$CMD" &
-        else
-            CMD="aria2c --file-allocation=none -q --min-split-size=500M -x 6 -d \"$DEST_DIR\" -o \"$(basename \"$NAME\")\" \"$MODEL_URL\""
-            echo "$CMD"
-            eval "$CMD" &
-        fi
+
+        #huggingface-cli login --token $HUGGINGFACE_APIKEY
+        # Download the file and capture the output (full path)
+        output=$(huggingface-cli download $REPO $REPO_PATH --local-dir $DEST_DIR --token $HUGGINGFACE_APIKEY) 
+
+        # Extract just the filename
+        filename=$(basename "$output")
+
+        # Move/rename the file
+        mv "$output" "$DEST_DIR/$LOCAL_NAME"
 
         # Increment the counter for running downloads
         ((running_downloads++))
@@ -161,7 +155,11 @@ if [ ! -f "$INSTALL_FLAG" ]; then
 	comfy --skip-prompt --no-enable-telemetry node registry-install wavespeed &
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-openpose-editor &
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-crystools &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-mmaudio
+	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-mmaudio &
+    comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_fill-nodes &
+    comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-WanVideoWrapper
+    
+
 	sleep 3
     cd $BASE_DIR/custom_nodes && git clone https://github.com/ssitu/ComfyUI_UltimateSDUpscale --recursive
     sleep 3

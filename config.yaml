@@ -1,129 +1,187 @@
 text_encoders:
-  - url: "https://huggingface.com/comfyanonymous/cosmos_1.0_text_encoder_and_VAE_ComfyUI/resolve/main/text_encoders/oldt5_xxl_fp8_e4m3fn_scaled.safetensors"
-    name: "cosmos/oldt5_xxl_fp8_e4m3fn_scaled.safetensors"
+  - repo: "comfyanonymous/cosmos_1.0_text_encoder_and_VAE_ComfyUI"
+    repo_path: "text_encoders/oldt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    local_dir: "cosmos"
+    local_name: "oldt5_xxl_fp8_e4m3fn_scaled.safetensors"
     model_categories: ["cosmos"]
+  - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
+    repo_path: "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    local_dir: "WAN"
+    local_name: "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    model_categories: ["wan"]
 
 clip:
-  - url: "https://huggingface.com/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
-    name: "clip_l.safetensors"
+  - repo: "comfyanonymous/flux_text_encoders"
+    repo_path: "clip_l.safetensors"
+    local_dir: ""
+    local_name: "clip_l.safetensors"
     model_categories: ["all"]
-  - url: "https://huggingface.com/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors"
-    name: "FLUX/t5xxl_fp16.safetensors"
+  - repo: "comfyanonymous/flux_text_encoders"
+    repo_path: "t5xxl_fp16.safetensors"
+    local_dir: "FLUX"
+    local_name: "t5xxl_fp16.safetensors"
     model_categories: ["flux_high"]
-  - url: "https://huggingface.com/city96/t5-v1_1-xxl-encoder-gguf/resolve/main/t5-v1_1-xxl-encoder-Q8_0.gguf"
-    name: "FLUX/t5-v1_1-xxl-encoder-Q8_0.gguf"
+  - repo: "city96/t5-v1_1-xxl-encoder-gguf"
+    repo_path: "t5-v1_1-xxl-encoder-Q8_0.gguf"
+    local_dir: "FLUX"
+    local_name: "t5-v1_1-xxl-encoder-Q8_0.gguf"
     model_categories: ["flux_low"]
-  - url: "https://huggingface.com/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
-    name: "FLUX/t5xxl_fp8_e4m3fn.safetensors"
+  - repo: "comfyanonymous/flux_text_encoders"
+    repo_path: "t5xxl_fp8_e4m3fn.safetensors"
+    local_dir: "FLUX"
+    local_name: "t5xxl_fp8_e4m3fn.safetensors"
     model_categories: ["flux_low"]
-  - url: "https://huggingface.com/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/text_encoders/llava_llama3_fp8_scaled.safetensors"
-    name: "HUNYUAN/llava_llama3_fp8_scaled.safetensors"
+  - repo: "Comfy-Org/HunyuanVideo_repackaged"
+    repo_path: "split_files/text_encoders/clip_l.safetensors"
+    local_dir: "HUNYUAN"
+    local_name: "clip_l.safetensors"
     model_categories: ["hunyuan"]
-  - url: "https://huggingface.com/stabilityai/stable-diffusion-3.5-large/resolve/main/text_encoders/clip_g.safetensors"
-    name: "SD35/clip_g.safetensors"
+  - repo: "stabilityai/stable-diffusion-3.5-large"
+    repo_path: "text_encoders/clip_g.safetensors"
+    local_dir: "SD35"
+    local_name: "clip_g.safetensors"
     model_categories: ["sd35"]
-    use_huggingface_api: true
-  - url: "https://huggingface.com/stabilityai/stable-diffusion-3.5-large/resolve/main/text_encoders/t5xxl_fp8_e4m3fn.safetensors"
-    name: "SD35/t5xxl_fp8_e4m3fn.safetensors"
+  - repo: "stabilityai/stable-diffusion-3.5-large"
+    repo_path: "text_encoders/t5xxl_fp8_e4m3fn.safetensors"
+    local_dir: "SD35"
+    local_name: "t5xxl_fp8_e4m3fn.safetensors"
     model_categories: ["sd35"]
-    use_huggingface_api: true
+
+clip_vision:
+  - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
+    repo_path: "split_files/clip_vision/clip_vision_h.safetensors"
+    local_dir: "WAN"
+    local_name: "clip_vision_h.safetensors"
+    model_categories: ["wan"]
 
 checkpoints:
-  - url: "https://huggingface.com/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
-    name: "SDXL/sd_xl_base_1.0.sensors"
+  - repo: "stabilityai/stable-diffusion-xl-base-1.0"
+    repo_path: "sd_xl_base_1.0.safetensors"
+    local_dir: "SDXL"
+    local_name: "sd_xl_base_1.0.safetensors"
     model_categories: ["sdxl"]
-  - url: "https://civitai.com/api/download/models/119057?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-    name: "SD15/meinamix_meinaV11.safetensors"
-    model_categories: ["sd15"]
-  - url: "https://huggingface.co/stabilityai/stable-diffusion-3.5-large/resolve/main/sd3.5_large.safetensors"
-    name: "SD35/sd3.5_large.safetensors"
+  - repo: "stable-diffusion-3.5-large"
+    repo_path: "sd3.5_large.safetensors"
+    local_dir: "SD35"
+    local_name: "sd3.5_large.safetensors"
     model_categories: ["sd35"]
-    use_huggingface_api: true
 
 unet:
-   - url: "https://huggingface.com/city96/HunyuanVideo-gguf/resolve/main/hunyuan-video-t2v-720p-Q8_0.gguf"
-     name: "HUNYUAN/hunyuan-video-t2v-720p-Q8_0.gguf"
-     model_categories: ["hunyuan_low"]   
-   - url: "https://huggingface.com/city96/FLUX.1-dev-gguf/resolve/main/flux1-dev-Q8_0.gguf"
-     name: "FLUX/flux1-dev-Q8_0.gguf"
-     model_categories: ["flux_low"]
-
+  - repo: "city96/HunyuanVideo-gguf"
+    repo_path: "hunyuan-video-t2v-720p-Q8_0.gguf"
+    local_dir: "HUNYUAN"
+    local_name: "hunyuan-video-t2v-720p-Q8_0.gguf"
+    model_categories: ["hunyuan_low"]
+  - repo: "city96/FLUX.1-dev-gguf"
+    repo_path: "flux1-dev-Q8_0.gguf"
+    local_dir: "FLUX"
+    local_name: "flux1-dev-Q8_0.gguf"
+    model_categories: ["flux_low"]
 
 diffusion_models:
-  - url: "https://huggingface.com/cocktailpeanut/xulf-dev/resolve/main/flux1-dev.safetensors"
-    name: "FLUX/flux1-dev.safetensors"
+  - repo: "cocktailpeanut/xulf-dev"
+    repo_path: "flux1-dev.safetensors"
+    local_dir: "FLUX"
+    local_name: "flux1-dev.safetensors"
     model_categories: ["flux_high"]
-  - url: "https://huggingface.com/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/diffusion_models/hunyuan_video_t2v_720p_bf16.safetensors"
-    name: "HUNYUAN/hunyuan_video_t2v_720p_bf16.safetensors"
+  - repo: "Comfy-Org/HunyuanVideo_repackaged"
+    repo_path: "split_files/diffusion_models/hunyuan_video_t2v_720p_bf16.safetensors"
+    local_dir: "HUNYUAN"
+    local_name: "hunyuan_video_t2v_720p_bf16.safetensors"
     model_categories: ["hunyuan_high"]
-  - url: "https://huggingface.com/mcmonkey/cosmos-1.0/resolve/main/Cosmos-1_0-Diffusion-7B-Video2World.safetensors"
-    name: "cosmos/Cosmos-1_0-Diffusion-7B-Video2World.safetensors"
+  - repo: "mcmonkey/cosmos-1.0"
+    repo_path: "Cosmos-1_0-Diffusion-7B-Video2World.safetensors"
+    local_dir: "cosmos"
+    local_name: "Cosmos-1_0-Diffusion-7B-Video2World.safetensors"
     model_categories: ["cosmos_video"]
-  - url: "https://huggingface.com/mcmonkey/cosmos-1.0/resolve/main/Cosmos-1_0-Diffusion-7B-Text2World.safetensors"
-    name: "cosmos/Cosmos-1_0-Diffusion-7B-Text2World.safetensors"
+  - repo: "mcmonkey/cosmos-1.0"
+    repo_path: "Cosmos-1_0-Diffusion-7B-Text2World.safetensors"
+    local_dir: "cosmos"
+    local_name: "Cosmos-1_0-Diffusion-7B-Text2World.safetensors"
     model_categories: ["cosmos_text"]
+  - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
+    repo_path: "split_files/diffusion_models/wan2.1_i2v_480p_14B_bf16.safetensors"
+    local_dir: "WAN"
+    local_name: "wan2.1_i2v_480p_14B_bf16.safetensors"
+    model_categories: ["wan"]
 
 upscale_models:
-  - url: "https://huggingface.com/Phips/4xNomos8kDAT/resolve/main/4xNomos8kDAT.safetensors"
-    name: "4xNomos8kDAT.safetensors"
+  - repo: "Phips/4xNomos8kDAT"
+    repo_path: "4xNomos8kDAT.safetensors"
+    local_dir: ""
+    local_name: "4xNomos8kDAT.safetensors"
     model_categories: ["all"]
 
 vae:
-  - url: "https://huggingface.com/cocktailpeanut/xulf-dev/resolve/main/ae.safetensors"
-    name: "FLUX/ae.safetensors"
+  - repo: "cocktailpeanut/xulf-dev"
+    repo_path: "ae.safetensors"
+    local_dir: "FLUX"
+    local_name: "ae.safetensors"
     model_categories: ["all"]
-  - url: "https://civitai.com/api/download/models/948574?type=VAE&format=SafeTensor"
-    name: "SD15/kl-f8-anime2.safetensors"
+  - repo: "Comfy-Org/HunyuanVideo_repackaged"
+    repo_path: "split_files/vae/hunyuan_video_vae_bf16.safetensors"
+    local_dir: "HUNYUAN"
+    local_name: "hunyuan_video_vae_bf16.safetensors"
     model_categories: ["all"]
-  - url: "https://huggingface.com/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/vae/hunyuan_video_vae_bf16.safetensors"
-    name: "HUNYUAN/hunyuan_video_vae_bf16.safetensors"
-    model_categories: ["all"]
-  - url: "https://huggingface.com/comfyanonymous/cosmos_1.0_text_encoder_and_VAE_ComfyUI/resolve/main/vae/cosmos_cv8x8x8_1.0.safetensors"
-    name: "cosmos/cosmos_cv8x8x8_1.0.safetensors"
+  - repo: "comfyanonymous/cosmos_1.0_text_encoder_and_VAE_ComfyUI"
+    repo_path: "vae/cosmos_cv8x8x8_1.0.safetensors"
+    local_dir: "cosmos"
+    local_name: "cosmos_cv8x8x8_1.0.safetensors"
     model_categories: ["cosmos"]
+  - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
+    repo_path: "split_files/vae/wan_2.1_vae.safetensors"
+    local_dir: "WAN"
+    local_name: "wan_2.1_vae.safetensors"
+    model_categories: ["wan"]
 
 loras:
-  - url: "https://civitai.com/api/download/models/805898?type=Model&format=SafeTensor"
-    name: "FLUX/Aesthetic_Amateur_Photo_V3.safetensors"
+  - repo: "comfyanonymous/flux_RealismLora_converted_comfyui"
+    repo_path: "flux_realism_lora.safetensors"
+    local_dir: "FLUX"
+    local_name: "flux_realism_lora.safetensors"
     model_categories: ["flux_lora"]
-  - url: "https://huggingface.com/comfyanonymous/flux_RealismLora_converted_comfyui/resolve/main/flux_realism_lora.safetensors"
-    name: "FLUX/flux_realism_lora.safetensors"
-    model_categories: ["flux_lora"]
-  - url: "https://huggingface.com/latent-consistency/lcm-lora-sdxl/resolve/main/pytorch_lora_weights.safetensors"
-    name: "SDXL/LCM_LoRA_Weights_SDXL.safetensors"
+  - repo: "latent-consistency/lcm-lora-sdxl"
+    repo_path: "pytorch_lora_weights.safetensors"
+    local_dir: "SDXL"
+    local_name: "LCM_LoRA_Weights_SDXL.safetensors"
     model_categories: ["sdxl_lora"]
 
 controlnet:
-  - url: "https://huggingface.com/jasperai/Flux.1-dev-Controlnet-Upscaler/resolve/main/diffusion_pytorch_model.safetensors"
-    name: "FLUX/Flux.1-dev-Controlnet-Upscaler.safetensors"
+  - repo: "jasperai/Flux.1-dev-Controlnet-Upscaler"
+    repo_path: "diffusion_pytorch_model.safetensors"
+    local_dir: "FLUX"
+    local_name: "Flux.1-dev-Controlnet-Upscaler.safetensors"
     model_categories: ["flux_controlnet"]
-  - url: "https://huggingface.com/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_canny_fp16.safetensors"
-    name: "SD15/control_v11p_sd15_canny_fp16.safetensors"
+  - repo: "jasperai/Flux.1-dev-Controlnet-Upscaler"
+    repo_path: "diffusion_pytorch_model.safetensors"
+    local_dir: "SD15"
+    local_name: "control_v11p_sd15_canny_fp16.safetensors"
     model_categories: ["sd15_controlnet"]
-  - url: "https://huggingface.com/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_openpose_fp16.safetensors"
-    name: "SD15/control_v11p_sd15_openpose_fp16.safetensors"
-    model_categories: ["sd15_controlnet"]
-  - url: "https://huggingface.com/InstantX/FLUX.1-dev-Controlnet-Union/resolve/main/diffusion_pytorch_model.safetensors"
-    name: "FLUX/FLUX.1-dev-Controlnet-Union.safetensors"
+  - repo: "InstantX/FLUX.1-dev-Controlnet-Union"
+    repo_path: "diffusion_pytorch_model.safetensors"
+    local_dir: "FLUX"
+    local_name: "FLUX.1-dev-Controlnet-Union.safetensors"
     model_categories: ["flux_controlnet"]
-  - url: "https://huggingface.com/InstantX/FLUX.1-dev-Controlnet-Canny/resolve/main/diffusion_pytorch_model.safetensors"
-    name: "FLUX/FLUX.1-dev-Controlnet-Canny.safetensors"
+  - repo: "InstantX/FLUX.1-dev-Controlnet-Canny"
+    repo_path: "diffusion_pytorch_model.safetensors"
+    local_dir: "FLUX"
+    local_name: "FLUX.1-dev-Controlnet-Canny.safetensors"
     model_categories: ["flux_controlnet"]
-  - url: "https://huggingface.co/stabilityai/stable-diffusion-3.5-controlnets/resolve/main/sd3.5_large_controlnet_canny.safetensors"
-    name: "SD35/sd3.5_large_controlnet_canny.safetensors"
+  - repo: "stabilityai/stable-diffusion-3.5-controlnets"
+    repo_path: "sd3.5_large_controlnet_canny.safetensors"
+    local_dir: "SD35"
+    local_name: "sd3.5_large_controlnet_canny.safetensors"
     model_categories: ["sd35_controlnet"]
-    use_huggingface_api: true
-
-mmaudio:
-  - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
-    name: "apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
-    model_categories: ["mmaudio"]
-  - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/mmaudio_large_44k_v2_fp16.safetensors"
-    name: "mmaudio_large_44k_v2_fp16.safetensors"
-    model_categories: ["mmaudio"]
-  - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/mmaudio_synchformer_fp16.safetensors"
-    name: "mmaudio_synchformer_fp16.safetensors"
-    model_categories: ["mmaudio"]
-  - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/mmaudio_vae_44k_fp16.safetensors"
-    name: "mmaudio_vae_44k_fp16.safetensors"
-    model_categories: ["mmaudio"]
+# mmaudio:
+#   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
+#     name: "apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
+#     model_categories: ["mmaudio"]
+#   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/mmaudio_large_44k_v2_fp16.safetensors"
+#     name: "mmaudio_large_44k_v2_fp16.safetensors"
+#     model_categories: ["mmaudio"]
+#   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/mmaudio_synchformer_fp16.safetensors"
+#     name: "mmaudio_synchformer_fp16.safetensors"
+#     model_categories: ["mmaudio"]
+#   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/mmaudio_vae_44k_fp16.safetensors"
+#     name: "mmaudio_vae_44k_fp16.safetensors"
+#     model_categories: ["mmaudio"]

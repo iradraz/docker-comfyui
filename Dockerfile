@@ -4,13 +4,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV SHELL=/bin/bash
 ENV VENV_DIR=/workspace/venv
 ENV TMP_DIR=/tmp
-
+ENV BASE_DIR=/workspace/ComfyU
 # Update package list and install dependencies
 RUN apt-get update -y -qq && apt-get install -qq --yes --no-install-recommends \
     software-properties-common libgl1 \
     build-essential rsync aria2 \
     ffmpeg libsm6 libxext6 \
-    # nvidia-cuda-toolkit \
+    nvidia-cuda-toolkit \
     wget git sudo curl vim bash \
     btop glances
  
