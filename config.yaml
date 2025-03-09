@@ -9,6 +9,11 @@ text_encoders:
     local_dir: "WAN"
     local_name: "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
     model_categories: ["wan"]
+  - repo: "Comfy-Org/mochi_preview_repackaged"
+    repo_path: "split_files/text_encoders/t5xxl_fp16.safetensors"
+    local_dir: "ltxv"
+    local_name: "t5xxl_fp16.safetensors"
+    model_categories: ["ltxv"]
 
 clip:
   - repo: "comfyanonymous/flux_text_encoders"
@@ -65,6 +70,11 @@ checkpoints:
     local_dir: "SD35"
     local_name: "sd3.5_large.safetensors"
     model_categories: ["sd35"]
+  - repo: "Lightricks/LTX-Video"
+    repo_path: "ltx-video-2b-v0.9.5.safetensors"
+    local_dir: "ltxv"
+    local_name: "ltx-video-2b-v0.9.5.safetensors"
+    model_categories: ["ltxv"]
 
 unet:
   - repo: "city96/HunyuanVideo-gguf"
@@ -103,12 +113,13 @@ diffusion_models:
     repo_path: "split_files/diffusion_models/wan2.1_i2v_480p_14B_bf16.safetensors"
     local_dir: "WAN"
     local_name: "wan2.1_i2v_480p_14B_bf16.safetensors"
-    model_categories: ["wan"]
+    model_categories: ["wan-i2v"]
   - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
     repo_path: "split_files/diffusion_models/wan2.1_t2v_14B_fp16.safetensors"
     local_dir: "WAN"
     local_name: "wan2.1_t2v_14B_fp16.safetensors"
-    model_categories: ["wan"]
+    model_categories: ["wan-t2v"]
+
 
 upscale_models:
   - repo: "Phips/4xNomos8kDAT"
@@ -138,6 +149,11 @@ vae:
     local_dir: "WAN"
     local_name: "wan_2.1_vae.safetensors"
     model_categories: ["wan"]
+  - repo: "Lightricks/LTX-Video"
+    repo_path: "diffusion_pytorch_model.safetensors"
+    local_dir: "ltxv"
+    local_name: "ltxv_vae.safetensors"
+    model_categories: ["ltxv"]
 
 loras:
   - repo: "comfyanonymous/flux_RealismLora_converted_comfyui"
