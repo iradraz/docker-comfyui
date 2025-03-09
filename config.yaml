@@ -104,6 +104,11 @@ diffusion_models:
     local_dir: "WAN"
     local_name: "wan2.1_i2v_480p_14B_bf16.safetensors"
     model_categories: ["wan"]
+  - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
+    repo_path: "split_files/diffusion_models/wan2.1_t2v_14B_fp16.safetensors"
+    local_dir: "WAN"
+    local_name: "wan2.1_t2v_14B_fp16.safetensors"
+    model_categories: ["wan"]
 
 upscale_models:
   - repo: "Phips/4xNomos8kDAT"
