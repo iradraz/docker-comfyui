@@ -161,6 +161,11 @@ loras:
     local_dir: "FLUX"
     local_name: "flux_realism_lora.safetensors"
     model_categories: ["flux_lora"]
+  - repo: "iradraz/loras"
+    repo_path: "1r4d-000012.safetensors"
+    local_dir: "FLUX"
+    local_name: "1r4d-000012.safetensors"
+    model_categories: ["flux_lora"]
   - repo: "latent-consistency/lcm-lora-sdxl"
     repo_path: "pytorch_lora_weights.safetensors"
     local_dir: "SDXL"
@@ -193,6 +198,14 @@ controlnet:
     local_dir: "SD35"
     local_name: "sd3.5_large_controlnet_canny.safetensors"
     model_categories: ["sd35_controlnet"]
+
+
+pulid:
+  - repo: "guozinan/PuLID"
+    repo_path: "pulid_flux_v0.9.1.safetensors"
+    local_dir: "pulid"
+    local_name: "pulid_flux_v0.9.1.safetensors"
+    model_categories: ["flux_pulid"]
 # mmaudio:
 #   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
 #     name: "apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"

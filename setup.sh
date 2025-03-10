@@ -157,7 +157,11 @@ if [ ! -f "$INSTALL_FLAG" ]; then
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-crystools &
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-mmaudio &
     comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_fill-nodes &
-    comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-WanVideoWrapper
+    comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-WanVideoWrapper &
+    comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-LTXVideo &
+    comfy --skip-prompt --no-enable-telemetry node registry-install was-node-suite-comfyui &
+    comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_pulid_flux_ll &
+    comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-Image-Filters
     
 
 	sleep 3
