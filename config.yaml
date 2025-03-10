@@ -199,13 +199,40 @@ controlnet:
     local_name: "sd3.5_large_controlnet_canny.safetensors"
     model_categories: ["sd35_controlnet"]
 
-
 pulid:
   - repo: "guozinan/PuLID"
     repo_path: "pulid_flux_v0.9.1.safetensors"
-    local_dir: "pulid"
+    local_dir: "FLUX"
     local_name: "pulid_flux_v0.9.1.safetensors"
     model_categories: ["flux_pulid"]
+
+insightface:
+  - repo: "MonsterMMORPG/tools"
+    repo_path: "1k3d68.onnx"
+    local_dir: "models/antelopev2"
+    local_name: "1k3d68.onnx"
+    model_categories: ["flux_pulid"]
+  - repo: "MonsterMMORPG/tools"
+    repo_path: "2d106det.onnx"
+    local_dir: "models/antelopev2"
+    local_name: "2d106det.onnx"
+    model_categories: ["flux_pulid"]
+  - repo: "MonsterMMORPG/tools"
+    repo_path: "genderage.onnx"
+    local_dir: "models/antelopev2"
+    local_name: "genderage.onnx"
+    model_categories: ["flux_pulid"]
+  - repo: "MonsterMMORPG/tools"
+    repo_path: "glintr100.onnx"
+    local_dir: "models/antelopev2"
+    local_name: "glintr100.onnx"
+    model_categories: ["flux_pulid"]
+  - repo: "MonsterMMORPG/tools"
+    repo_path: "scrfd_10g_bnkps.onnx"
+    local_dir: "models/antelopev2"
+    local_name: "scrfd_10g_bnkps.onnx"
+    model_categories: ["flux_pulid"]
+
 # mmaudio:
 #   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
 #     name: "apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
