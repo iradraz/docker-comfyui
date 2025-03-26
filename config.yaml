@@ -4,22 +4,27 @@ text_encoders:
     local_dir: "cosmos"
     local_name: "oldt5_xxl_fp8_e4m3fn_scaled.safetensors"
     model_categories: ["cosmos"]
-  - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
-    repo_path: "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+  # - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
+  #   repo_path: "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+  #   local_dir: "WAN"
+  #   local_name: "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+  #   model_categories: ["wan"]
+  - repo: "city96/umt5-xxl-encoder-gguf"
+    repo_path: "umt5-xxl-encoder-Q8_0.gguf"
     local_dir: "WAN"
-    local_name: "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    local_name: "umt5-xxl-encoder-Q8_0.gguf"
     model_categories: ["wan"]
-  - repo: "Comfy-Org/mochi_preview_repackaged"
-    repo_path: "split_files/text_encoders/t5xxl_fp16.safetensors"
-    local_dir: "ltxv"
-    local_name: "t5xxl_fp16.safetensors"
-    model_categories: ["ltxv"]
 
 clip:
   - repo: "comfyanonymous/flux_text_encoders"
     repo_path: "clip_l.safetensors"
     local_dir: ""
     local_name: "clip_l.safetensors"
+    model_categories: ["all"]
+  - repo: "stabilityai/stable-diffusion-3.5-large"
+    repo_path: "text_encoders/clip_g.safetensors"
+    local_dir: ""
+    local_name: "clip_g.safetensors"
     model_categories: ["all"]
   - repo: "comfyanonymous/flux_text_encoders"
     repo_path: "t5xxl_fp16.safetensors"
@@ -30,27 +35,7 @@ clip:
     repo_path: "t5-v1_1-xxl-encoder-Q8_0.gguf"
     local_dir: "FLUX"
     local_name: "t5-v1_1-xxl-encoder-Q8_0.gguf"
-    model_categories: ["flux_low"]
-  - repo: "comfyanonymous/flux_text_encoders"
-    repo_path: "t5xxl_fp8_e4m3fn.safetensors"
-    local_dir: "FLUX"
-    local_name: "t5xxl_fp8_e4m3fn.safetensors"
-    model_categories: ["flux_low"]
-  - repo: "Comfy-Org/HunyuanVideo_repackaged"
-    repo_path: "split_files/text_encoders/clip_l.safetensors"
-    local_dir: "HUNYUAN"
-    local_name: "clip_l.safetensors"
-    model_categories: ["hunyuan"]
-  - repo: "stabilityai/stable-diffusion-3.5-large"
-    repo_path: "text_encoders/clip_g.safetensors"
-    local_dir: "SD35"
-    local_name: "clip_g.safetensors"
-    model_categories: ["sd35"]
-  - repo: "stabilityai/stable-diffusion-3.5-large"
-    repo_path: "text_encoders/t5xxl_fp8_e4m3fn.safetensors"
-    local_dir: "SD35"
-    local_name: "t5xxl_fp8_e4m3fn.safetensors"
-    model_categories: ["sd35"]
+    model_categories: ["all"]
 
 clip_vision:
   - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
@@ -58,6 +43,23 @@ clip_vision:
     local_dir: "WAN"
     local_name: "clip_vision_h.safetensors"
     model_categories: ["wan"]
+  - repo: "openai/clip-vit-large-patch14"
+    repo_path: "model.safetensors"
+    local_dir: ""
+    local_name: "clip-vit-large-patch14.safetensors"
+    model_categories: ["flux_xlabs"]
+  - repo: "Comfy-Org/sigclip_vision_384"
+    repo_path: "sigclip_vision_patch14_384.safetensors"
+    local_dir: "FLUX"
+    local_name: "sigclip_vision_384.safetensors"
+    model_categories: ["flux_redux"]
+
+style_models:
+  - repo: "black-forest-labs/FLUX.1-Redux-dev"
+    repo_path: "flux1-redux-dev.safetensors"
+    local_dir: "FLUX"
+    local_name: "flux1-redux-dev.safetensors"
+    model_categories: ["flux_redux"]
 
 checkpoints:
   - repo: "stabilityai/stable-diffusion-xl-base-1.0"
@@ -65,11 +67,6 @@ checkpoints:
     local_dir: "SDXL"
     local_name: "sd_xl_base_1.0.safetensors"
     model_categories: ["sdxl"]
-  - repo: "stable-diffusion-3.5-large"
-    repo_path: "sd3.5_large.safetensors"
-    local_dir: "SD35"
-    local_name: "sd3.5_large.safetensors"
-    model_categories: ["sd35"]
   - repo: "Lightricks/LTX-Video"
     repo_path: "ltx-video-2b-v0.9.5.safetensors"
     local_dir: "ltxv"
@@ -87,6 +84,26 @@ unet:
     local_dir: "FLUX"
     local_name: "flux1-dev-Q8_0.gguf"
     model_categories: ["flux_low"]
+  - repo: "city96/stable-diffusion-3.5-large-gguf"
+    repo_path: "sd3.5_large-Q8_0.gguf"
+    local_dir: "SD35"
+    local_name: "sd3.5_large-Q8_0.gguf"
+    model_categories: ["sd35_low"]
+  - repo: "city96/Wan2.1-I2V-14B-480P-gguf"
+    repo_path: "wan2.1-i2v-14b-480p-Q8_0.gguf"
+    local_dir: "WAN"
+    local_name: "wan2.1-i2v-14b-480p-Q8_0.gguf"
+    model_categories: ["wan_low"]
+  - repo: "city96/Wan2.1-T2V-14B-gguf"
+    repo_path: "wan2.1-t2v-14b-Q8_0.gguf"
+    local_dir: "WAN"
+    local_name: "wan2.1-t2v-14b-Q8_0.gguf"
+    model_categories: ["wan_low"]
+  - repo: "city96/LTX-Video-0.9.5-gguf"
+    repo_path: "ltx-video-2b-v0.9.5-Q8_0.gguf"
+    local_dir: "ltxv"
+    local_name: "ltx-video-2b-v0.9.5-Q8_0.gguf"
+    model_categories: ["ltxv_low"]
 
 diffusion_models:
   - repo: "cocktailpeanut/xulf-dev"
@@ -119,6 +136,7 @@ diffusion_models:
     local_dir: "WAN"
     local_name: "wan2.1_t2v_14B_fp16.safetensors"
     model_categories: ["wan-t2v"]
+  
 
 
 upscale_models:
@@ -131,7 +149,7 @@ upscale_models:
 vae:
   - repo: "cocktailpeanut/xulf-dev"
     repo_path: "ae.safetensors"
-    local_dir: "FLUX"
+    local_dir: ""
     local_name: "ae.safetensors"
     model_categories: ["all"]
   - repo: "Comfy-Org/HunyuanVideo_repackaged"
@@ -166,6 +184,11 @@ loras:
     local_dir: "FLUX"
     local_name: "1r4d-000012.safetensors"
     model_categories: ["flux_lora"]
+  - repo: "falanaja/Amateur-Photography"
+    repo_path: "amateurphoto-v6-forcu.safetensors"
+    local_dir: "FLUX"
+    local_name: "amateurphoto-v6-forcu.safetensors"
+    model_categories: ["flux_lora"]
   - repo: "latent-consistency/lcm-lora-sdxl"
     repo_path: "pytorch_lora_weights.safetensors"
     local_dir: "SDXL"
@@ -193,6 +216,11 @@ controlnet:
     local_dir: "FLUX"
     local_name: "FLUX.1-dev-Controlnet-Canny.safetensors"
     model_categories: ["flux_controlnet"]
+  - repo: "alimama-creative/FLUX.1-dev-Controlnet-Inpainting-Beta"
+    repo_path: "diffusion_pytorch_model.safetensors"
+    local_dir: "FLUX"
+    local_name: "FLUX.1-dev-Controlnet-Inpainting-Beta.safetensors"
+    model_categories: ["flux_controlnet"]
   - repo: "stabilityai/stable-diffusion-3.5-controlnets"
     repo_path: "sd3.5_large_controlnet_canny.safetensors"
     local_dir: "SD35"
@@ -205,6 +233,13 @@ pulid:
     local_dir: "FLUX"
     local_name: "pulid_flux_v0.9.1.safetensors"
     model_categories: ["flux_pulid"]
+
+xlabs:
+  - repo: "XLabs-AI/flux-ip-adapter"
+    repo_path: "ip_adapter.safetensors"
+    local_dir: "ipadapters"
+    local_name: "ip_adapter.safetensors"
+    model_categories: ["flux_xlabs"]
 
 insightface:
   - repo: "MonsterMMORPG/tools"
@@ -233,16 +268,24 @@ insightface:
     local_name: "scrfd_10g_bnkps.onnx"
     model_categories: ["flux_pulid"]
 
-# mmaudio:
-#   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
-#     name: "apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
-#     model_categories: ["mmaudio"]
-#   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/mmaudio_large_44k_v2_fp16.safetensors"
-#     name: "mmaudio_large_44k_v2_fp16.safetensors"
-#     model_categories: ["mmaudio"]
-#   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/mmaudio_synchformer_fp16.safetensors"
-#     name: "mmaudio_synchformer_fp16.safetensors"
-#     model_categories: ["mmaudio"]
-#   - url: "https://huggingface.com/Kijai/MMAudio_safetensors/resolve/main/mmaudio_vae_44k_fp16.safetensors"
-#     name: "mmaudio_vae_44k_fp16.safetensors"
-#     model_categories: ["mmaudio"]
+mmaudio:
+  - repo: "Kijai/MMAudio_safetensors"
+    repo_path: "apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
+    local_dir: "mmaudio"
+    local_name: "apple_DFN5B-CLIP-ViT-H-14-384_fp16.safetensors"
+    model_categories: ["mmaudio"]
+  - repo: "Kijai/MMAudio_safetensors"
+    repo_path: "mmaudio_large_44k_v2_fp16.safetensors"
+    local_dir: "mmaudio"
+    local_name: "mmaudio_large_44k_v2_fp16.safetensors"
+    model_categories: ["mmaudio"]
+  - repo: "Kijai/MMAudio_safetensors"
+    repo_path: "mmaudio_synchformer_fp16.safetensors"
+    local_dir: "mmaudio"
+    local_name: "mmaudio_synchformer_fp16.safetensors"
+    model_categories: ["mmaudio"]
+  - repo: "Kijai/MMAudio_safetensors"
+    repo_path: "mmaudio_vae_44k_fp16.safetensors"
+    local_dir: "mmaudio"
+    local_name: "mmaudio_vae_44k_fp16.safetensors"
+    model_categories: ["mmaudio"]

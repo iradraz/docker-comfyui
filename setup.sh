@@ -62,22 +62,29 @@ download_models() {
         cd "$DEST_DIR"
 
         #huggingface-cli login --token $HUGGINGFACE_APIKEY
-        # Download the file and capture the output (full path)
-        output=$(huggingface-cli download $REPO $REPO_PATH --local-dir $DEST_DIR --token $HUGGINGFACE_APIKEY) 
-
-        # Extract just the filename
-        filename=$(basename "$output")
-
-        # Move/rename the file
-        mv "$output" "$DEST_DIR/$LOCAL_NAME"
-
         # Increment the counter for running downloads
-        ((running_downloads++))
 
-        # If we've reached the max parallel downloads, wait for one to finish
-        while (( running_downloads >= MAX_PARALLEL_DOWNLOADS )); do
-            wait -n  # Wait for any one background job to complete
-            ((running_downloads--))  # Decrement the counter when a job finishes
+        tmpdir=$(mktemp -d -p "$DEST_DIR")
+        (
+          huggingface-cli download "$REPO" "$REPO_PATH" --local-dir "$tmpdir" --token "$HUGGINGFACE_APIKEY" 2>&1
+          # Wait until no .incomplete files remain in $tmpdir recursively
+          while find "$tmpdir" -type f -name '*incomplete' | grep -q .; do
+            sleep 1
+          done
+          # Look for the downloaded file in $tmpdir (excluding subdirectories)
+          downloaded_file=$(find "$tmpdir" -maxdepth 1 -type f | head -n 1)
+          echo "Downloaded file: $downloaded_file"
+          if [ -n "$downloaded_file" ] && [ -f "$downloaded_file" ]; then
+            mv "$downloaded_file" "$DEST_DIR/$LOCAL_NAME"
+          else
+            echo "Download failed for $LOCAL_NAME"
+          fi
+          rm -rf "$tmpdir"
+        ) &
+        
+        # Wait until the number of running "huggingface-cli" processes is below MAX_PARALLEL_DOWNLOADS
+        while [ "$(pgrep -fc 'huggingface-cli')" -ge "$MAX_PARALLEL_DOWNLOADS" ]; do
+          sleep 1
         done
     done
 
@@ -138,6 +145,8 @@ if [ ! -f "$INSTALL_FLAG" ]; then
 	comfy --skip-prompt --no-enable-telemetry node install comfy-image-saver &
 	comfy --skip-prompt --no-enable-telemetry node install ComfyUI-HunyuanVideoSamplerSave &
 	comfy --skip-prompt --no-enable-telemetry node install ComfyUI-OpenPose-Editor &
+    comfy --skip-prompt --no-enable-telemetry node install x-flux-comfyui &
+    comfy --skip-prompt --no-enable-telemetry node install ComfyUI_AdvancedRefluxControl &
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-videohelpersuite &
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-wd14-tagger & # pythongosssss
 	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-custom-scripts & # pythongosssss
