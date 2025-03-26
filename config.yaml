@@ -136,9 +136,12 @@ diffusion_models:
     local_dir: "WAN"
     local_name: "wan2.1_t2v_14B_fp16.safetensors"
     model_categories: ["wan-t2v"]
+  - repo: "ali-vilab/ACE_Plus"
+    repo_path: "ace_plus_fft.safetensors"
+    local_dir: "FLUX"
+    local_name: "ace_plus_fft.safetensors"
+    model_categories: ["flux_ace_plus"]
   
-
-
 upscale_models:
   - repo: "Phips/4xNomos8kDAT"
     repo_path: "4xNomos8kDAT.safetensors"
@@ -149,8 +152,13 @@ upscale_models:
 vae:
   - repo: "cocktailpeanut/xulf-dev"
     repo_path: "ae.safetensors"
-    local_dir: ""
+    local_dir: "FLUX"
     local_name: "ae.safetensors"
+    model_categories: ["all"]
+  - repo: "stabilityai/stable-diffusion-3.5-large"
+    repo_path: "vae/diffusion_pytorch_model.safetensors"
+    local_dir: "SD35"
+    local_name: "vae_3.5_large.safetensors"
     model_categories: ["all"]
   - repo: "Comfy-Org/HunyuanVideo_repackaged"
     repo_path: "split_files/vae/hunyuan_video_vae_bf16.safetensors"
@@ -161,17 +169,17 @@ vae:
     repo_path: "vae/cosmos_cv8x8x8_1.0.safetensors"
     local_dir: "cosmos"
     local_name: "cosmos_cv8x8x8_1.0.safetensors"
-    model_categories: ["cosmos"]
+    model_categories: ["all"]
   - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
     repo_path: "split_files/vae/wan_2.1_vae.safetensors"
     local_dir: "WAN"
     local_name: "wan_2.1_vae.safetensors"
-    model_categories: ["wan"]
+    model_categories: ["all"]
   - repo: "Lightricks/LTX-Video"
     repo_path: "diffusion_pytorch_model.safetensors"
     local_dir: "ltxv"
     local_name: "ltxv_vae.safetensors"
-    model_categories: ["ltxv"]
+    model_categories: ["all"]
 
 loras:
   - repo: "comfyanonymous/flux_RealismLora_converted_comfyui"
@@ -194,6 +202,21 @@ loras:
     local_dir: "SDXL"
     local_name: "LCM_LoRA_Weights_SDXL.safetensors"
     model_categories: ["sdxl_lora"]
+  - repo: "ali-vilab/ACE_Plus"
+    repo_path: "subject/comfyui_subject_lora16.safetensors"
+    local_dir: "FLUX/subject"
+    local_name: "comfyui_subject_lora16.safetensors"
+    model_categories: ["flux_ace_plus"]
+  - repo: "ali-vilab/ACE_Plus"
+    repo_path: "local_editing/comfyui_local_lora16.safetensors"
+    local_dir: "FLUX/local_editing"
+    local_name: "comfyui_local_lora16.safetensors"
+    model_categories: ["flux_ace_plus"]
+  - repo: "ali-vilab/ACE_Plus"
+    repo_path: "portrait/comfyui_portrait_lora64.safetensors"
+    local_dir: "FLUX/portrait"
+    local_name: "comfyui_portrait_lora64.safetensors"
+    model_categories: ["flux_ace_plus"]
 
 controlnet:
   - repo: "jasperai/Flux.1-dev-Controlnet-Upscaler"
