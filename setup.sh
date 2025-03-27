@@ -43,7 +43,7 @@ download_models() {
     cd "$MODEL_DIR"
     #             print(f"{category},{repo},{repo_path},{local_dir},{local_name}")
     python3 $TMP_DIR/read_yaml.py "$DESIRED_MODELS" | while IFS=',' read -r CATEGORY REPO REPO_PATH LOCAL_DIR LOCAL_NAME; do
-        # echo "DEBUG: CATEGORY='$CATEGORY', MODEL_URL='$MODEL_URL', NAME='$NAME', CATEGORIES='$CATEGORIES'"  # Debug output
+        echo "DEBUG: CATEGORY='$CATEGORY', MODEL_URL='$MODEL_URL', NAME='$NAME', CATEGORIES='$CATEGORIES'"  # Debug output
 
         # Check if NAME or MODEL_URL is empty
         if [ -z "$REPO" ] || [ -z "$REPO_PATH" ]; then
@@ -71,8 +71,9 @@ download_models() {
           while find "$tmpdir" -type f -name '*incomplete' | grep -q .; do
             sleep 1
           done
-          # Look for the downloaded file in $tmpdir (excluding subdirectories)
-          downloaded_file=$(find "$tmpdir" -maxdepth 1 -type f | head -n 1)
+          sleep 5  # Wait for 5 seconds to ensure the file is fully downloaded
+          # Look for the downloaded file with gguf, safetensors, or onnx extension
+          downloaded_file=$(find "$tmpdir" -type f \( -iname "*.gguf" -o -iname "*.safetensors" -o -iname "*.onnx" \) | head -n 1)
           echo "Downloaded file: $downloaded_file"
           if [ -n "$downloaded_file" ] && [ -f "$downloaded_file" ]; then
             mv "$downloaded_file" "$DEST_DIR/$LOCAL_NAME"
@@ -142,41 +143,44 @@ if [ ! -f "$INSTALL_FLAG" ]; then
 
 	comfy --workspace=$BASE_DIR --skip-prompt --no-enable-telemetry install --nvidia --restore
 	comfy --install-completion
-	comfy --skip-prompt --no-enable-telemetry node install comfy-image-saver &
-	comfy --skip-prompt --no-enable-telemetry node install ComfyUI-HunyuanVideoSamplerSave &
-	comfy --skip-prompt --no-enable-telemetry node install ComfyUI-OpenPose-Editor &
-    comfy --skip-prompt --no-enable-telemetry node install x-flux-comfyui &
-    comfy --skip-prompt --no-enable-telemetry node install ComfyUI_AdvancedRefluxControl &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-videohelpersuite &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-wd14-tagger & # pythongosssss
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-custom-scripts & # pythongosssss
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_essentials &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-webcam-node &
-	comfy --skip-prompt --no-enable-telemetry node registry-install gguf &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_controlnet_aux &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_ipadapter_plus &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-hunyuanvideowrapper &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-advanced-controlnet &
-	comfy --skip-prompt --no-enable-telemetry node registry-install rgthree-comfy &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_ultimatesdupscale &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-kjnodes &
-	comfy --skip-prompt --no-enable-telemetry node registry-install cg-use-everywhere &
-	comfy --skip-prompt --no-enable-telemetry node registry-install wavespeed &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-openpose-editor &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-crystools &
-	comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-mmaudio &
-    comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_fill-nodes &
-    comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-WanVideoWrapper &
-    comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-LTXVideo &
-    comfy --skip-prompt --no-enable-telemetry node registry-install was-node-suite-comfyui &
-    comfy --skip-prompt --no-enable-telemetry node registry-install pulid_comfyui &
-    comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_pulid_flux_ll &
-    comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-Image-Filters
-    
+    (
+        comfy --skip-prompt --no-enable-telemetry node install comfy-image-saver &
+        comfy --skip-prompt --no-enable-telemetry node install ComfyUI-HunyuanVideoSamplerSave &
+        comfy --skip-prompt --no-enable-telemetry node install ComfyUI-OpenPose-Editor &
+        comfy --skip-prompt --no-enable-telemetry node install x-flux-comfyui &
+        comfy --skip-prompt --no-enable-telemetry node install ComfyUI_AdvancedRefluxControl &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-videohelpersuite &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-wd14-tagger &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-custom-scripts &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_essentials &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-webcam-node &
+        comfy --skip-prompt --no-enable-telemetry node registry-install gguf &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_controlnet_aux &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_ipadapter_plus &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-hunyuanvideowrapper &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-advanced-controlnet &
+        comfy --skip-prompt --no-enable-telemetry node registry-install rgthree-comfy &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_ultimatesdupscale &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-kjnodes &
+        comfy --skip-prompt --no-enable-telemetry node registry-install cg-use-everywhere &
+        comfy --skip-prompt --no-enable-telemetry node registry-install wavespeed &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-openpose-editor &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-crystools &
+        comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-WanVideoWrapper &
+        comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-LTXVideo &
+        comfy --skip-prompt --no-enable-telemetry node registry-install was-node-suite-comfyui &
+        comfy --skip-prompt --no-enable-telemetry node registry-install ComfyUI-Image-Filters &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui-mmaudio &
+        cd $BASE_DIR/custom_nodes && git clone https://github.com/ssitu/ComfyUI_UltimateSDUpscale --recursive &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_fill-nodes &
+        comfy --skip-prompt --no-enable-telemetry node registry-install pulid_comfyui &
+        comfy --skip-prompt --no-enable-telemetry node registry-install comfyui_pulid_flux_ll &
 
-	sleep 3
-    cd $BASE_DIR/custom_nodes && git clone https://github.com/ssitu/ComfyUI_UltimateSDUpscale --recursive
-    sleep 3
+        wait
+    ) &
+    pid_comfy_nodes=$!
+    wait $pid_comfy_nodes
+
 	# comfy --skip-prompt --no-enable-telemetry node update all
 
 	# Define the path to the settings file

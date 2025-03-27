@@ -4,16 +4,16 @@ text_encoders:
     local_dir: "cosmos"
     local_name: "oldt5_xxl_fp8_e4m3fn_scaled.safetensors"
     model_categories: ["cosmos"]
-  # - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
-  #   repo_path: "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
-  #   local_dir: "WAN"
-  #   local_name: "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
-  #   model_categories: ["wan"]
+  - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
+    repo_path: "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    local_dir: "WAN"
+    local_name: "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    model_categories: ["wan_high"]
   - repo: "city96/umt5-xxl-encoder-gguf"
     repo_path: "umt5-xxl-encoder-Q8_0.gguf"
     local_dir: "WAN"
     local_name: "umt5-xxl-encoder-Q8_0.gguf"
-    model_categories: ["wan"]
+    model_categories: ["wan_low"]
 
 clip:
   - repo: "comfyanonymous/flux_text_encoders"
@@ -71,7 +71,7 @@ checkpoints:
     repo_path: "ltx-video-2b-v0.9.5.safetensors"
     local_dir: "ltxv"
     local_name: "ltx-video-2b-v0.9.5.safetensors"
-    model_categories: ["ltxv"]
+    model_categories: ["ltxv_high"]
 
 unet:
   - repo: "city96/HunyuanVideo-gguf"
@@ -130,12 +130,12 @@ diffusion_models:
     repo_path: "split_files/diffusion_models/wan2.1_i2v_480p_14B_bf16.safetensors"
     local_dir: "WAN"
     local_name: "wan2.1_i2v_480p_14B_bf16.safetensors"
-    model_categories: ["wan-i2v"]
+    model_categories: ["wan_high"]
   - repo: "Comfy-Org/Wan_2.1_ComfyUI_repackaged"
     repo_path: "split_files/diffusion_models/wan2.1_t2v_14B_fp16.safetensors"
     local_dir: "WAN"
     local_name: "wan2.1_t2v_14B_fp16.safetensors"
-    model_categories: ["wan-t2v"]
+    model_categories: ["wan_high"]
   - repo: "ali-vilab/ACE_Plus"
     repo_path: "ace_plus_fft.safetensors"
     local_dir: "FLUX"
@@ -176,7 +176,7 @@ vae:
     local_name: "wan_2.1_vae.safetensors"
     model_categories: ["all"]
   - repo: "Lightricks/LTX-Video"
-    repo_path: "diffusion_pytorch_model.safetensors"
+    repo_path: "vae/diffusion_pytorch_model.safetensors"
     local_dir: "ltxv"
     local_name: "ltxv_vae.safetensors"
     model_categories: ["all"]
@@ -196,6 +196,11 @@ loras:
     repo_path: "amateurphoto-v6-forcu.safetensors"
     local_dir: "FLUX"
     local_name: "amateurphoto-v6-forcu.safetensors"
+    model_categories: ["flux_lora"]
+  - repo: "alimama-creative/FLUX.1-Turbo-Alpha"
+    repo_path: "diffusion_pytorch_model.safetensors"
+    local_dir: "FLUX"
+    local_name: "FLUX.1-Turbo-Alpha.safetensors"
     model_categories: ["flux_lora"]
   - repo: "latent-consistency/lcm-lora-sdxl"
     repo_path: "pytorch_lora_weights.safetensors"
